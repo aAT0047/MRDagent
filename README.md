@@ -8,4 +8,4 @@ To address these challenges, we propose MRD-Agent, which integrates an ADMM (Alt
 Availability and implementation
 </div>
 
-<img src="https://github.com/aAT0047/MRD-Agent/blob/main/pict/figure1.png" alt="Figure 1" width="600">
+<img src="https://github.com/aAT0047/MRD-Agent/blob/main/pict/figure1.png" alt="Figure 1" width="1200">
