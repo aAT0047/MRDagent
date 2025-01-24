@@ -75,3 +75,131 @@ bin/score-client view \
   --output-format bam
 
 ```
+## Adaptive Parameters in MRD-Agent
+
+MRD-Agent supports a comprehensive set of **discrete**, **continuous**, and **filtering** parameters for adaptive optimization during the MRD detection process. Below is a categorized list of these parameters.
+
+---
+
+### **Calling Discrete Parameters**
+The following discrete parameters control specific thresholds and settings for variant calling:
+
+- `base-quality-score-threshold`
+- `callable-depth`
+- `f1r2-median-mq`
+- `f1r2-min-bq`
+- `max-reads-per-alignment-start`
+- `pcr-indel-qual`
+- `pcr-snv-qual`
+- `assembly-region-padding`
+- `kmer-size`
+- `max-assembly-region-size`
+- `max-prob-propagation-distance`
+- `min-assembly-region-size`
+- `max-unpruned-variants`
+- `min-dangling-branch-length`
+- `phred-scaled-global-read-mismapping-rate`
+- `pair-hmm-gap-continuation-penalty`
+- `mbq`
+
+---
+
+### **Calling Continuous Parameters**
+The following continuous parameters are used for dynamic threshold adjustments and error handling:
+
+- `init-lod`
+- `max-af`
+- `emit-lod`
+- `active-probability-threshold`
+- `adaptive-pruning-initial-error-rate`
+- `pruning-lod-threshold`
+- `flow-probability-threshold`
+- `expected-mismatch-rate-for-read-disqualification`
+- `min-AF`
+
+---
+
+### **Filter Parameters**
+These parameters are required for **FilterMutectCalls_objectivelast** and control post-calling filtering steps:
+
+- `distance_on_haplotype`
+- `f_score_beta`
+- `false_discovery_rate`
+- `initial_threshold`
+- `log_artifact_prior`
+- `log_indel_prior`
+- `log_snv_prior`
+- `max_events_in_region`
+- `min_slippage_length`
+- `pcr_slippage_rate`
+
+---
+## Usage Guide for MRD-Agent
+
+Below is an example usage script for running MRD-Agent using SLURM for parallel task management. This script processes BAM files by splitting them into groups, dynamically assigns tasks to SLURM job arrays, and executes the main MRD-Agent Python program.
+
+---
+
+### SLURM Batch Script Example
+
+```bash
+#!/bin/bash
+#SBATCH -N 1                       # Request 1 node per task
+#SBATCH -n 45                      # Maximum of 45 parallel tasks per job
+#SBATCH --ntasks-per-node=45       # Run 45 tasks per node
+#SBATCH --partition=9242           # Use partition 9242
+#SBATCH --output=%j_%a.out         # Output log file
+#SBATCH --error=%j_%a.err          # Error log file
+#SBATCH --array=0-10               # Job array index range (11 tasks)
+
+# Configuration paths
+FOLDER_PATH="yourpath/split_bam"
+OUTPUT_BASE_PATH="yourpath/ICGCCRAM/runbam/"
+TASK_OUTPUT_PATH="${OUTPUT_BASE_PATH}group_${SLURM_ARRAY_TASK_ID}/"
+
+# Dynamically create output directory
+mkdir -p "${TASK_OUTPUT_PATH}"
+
+# Retrieve all BAM file names
+bam_files=($(ls ${FOLDER_PATH}/*.bam | xargs -n 1 basename))
+total_files=${#bam_files[@]}
+
+# Grouping logic
+total_groups=11  # Total number of groups, matching SLURM_ARRAY_TASK_ID range
+group_size=$((total_files / total_groups))
+remainder=$((total_files % total_groups))
+
+if [ "$SLURM_ARRAY_TASK_ID" -lt "$remainder" ]; then
+    start_idx=$((SLURM_ARRAY_TASK_ID * (group_size + 1)))
+    end_idx=$((start_idx + group_size + 1))
+else
+    start_idx=$((SLURM_ARRAY_TASK_ID * group_size + remainder))
+    end_idx=$((start_idx + group_size))
+fi
+
+# Extract BAM files for the current group
+group_files=("${bam_files[@]:$start_idx:$((end_idx - start_idx))}")
+
+# Save file names to a TXT file (no paths)
+bam_files_list="${TASK_OUTPUT_PATH}bam_files_group_${SLURM_ARRAY_TASK_ID}.txt"
+printf "%s\n" "${group_files[@]}" > "${bam_files_list}"
+
+# Execute main program, passing the TXT file path
+python https://github.com/aAT0047/MRD-Agent/src_code/main.py \
+    --bam_files_path "${bam_files_list}" \
+    --output_path "${TASK_OUTPUT_PATH}"
+```
+
+### Why an Agent is Needed to Balance Constrained Conditions in Variant Detection
+We used MRD-Agent to conduct variant detection. MRD-Agent adopts a DQN framework to facilitate iterative parameter optimisation between the preliminary detection and filtering stages. By dynamically balancing the constraints on false negatives and false positives and integrating stepwise optimisation, MRD-Agent seeks to maximise the overall detection performance.
+
+![Figure 2](https://github.com/aAT0047/MRD-Agent/blob/main/pict/figure4.png)
+
+### Why a Meta-Model is Needed for Rapid Parameter Configuration
+```bash
+python https://github.com/aAT0047/MRD-Agent/metafeature/metafeatureindel.py
+python https://github.com/aAT0047/MRD-Agent/metafeature/metafeaturesnv.py
+```
+
+![Figure 5](https://github.com/aAT0047/MRD-Agent/blob/main/pict/figure5.png)
+
