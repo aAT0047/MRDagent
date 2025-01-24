@@ -40,8 +40,9 @@ pip install pysam numpy matplotlib sklearn scipy skmultilearn quickgt torch
 The dataset used in this project is sourced from the **PACA-CA Project**, which can be accessed via a **DACO-authorised account** at the following URL:
 [ICGC ARGO Platform](https://platform.icgc-argo.org/).
 
-### Download Instructions
-To download the required data files, you can use the `score-client` command-line tool. Below is an example command for downloading and processing the data:
+## Data Download Example
+
+To download data from the PACA-CA project, use the `score-client` command-line tool. Below is an example command for downloading and converting the data:
 
 ```bash
 bin/score-client view \
@@ -50,3 +51,4 @@ bin/score-client view \
   --bed-query /yourpath/icgccram/bed/DO35116.bed \
   --output-dir cramdata \
   --output-format bam
+
