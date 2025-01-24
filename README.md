@@ -33,3 +33,20 @@ Make sure you have the following Python libraries installed:
 You can install the Python dependencies using `pip`:
 ```bash
 pip install pysam numpy matplotlib sklearn scipy skmultilearn quickgt torch
+
+## Data Access
+
+### PACA-CA Project
+The dataset used in this project is sourced from the **PACA-CA Project**, which can be accessed via a **DACO-authorised account** at the following URL:
+[ICGC ARGO Platform](https://platform.icgc-argo.org/).
+
+### Download Instructions
+To download the required data files, you can use the `score-client` command-line tool. Below is an example command for downloading and processing the data:
+
+```bash
+bin/score-client view \
+  --manifest /yourpath/Donor_cramTSVs/DO35116.tsv \
+  --reference-file /yourpath/GRCh38_hla_decoy_ebv.fa.gz \
+  --bed-query /yourpath/icgccram/bed/DO35116.bed \
+  --output-dir cramdata \
+  --output-format bam
