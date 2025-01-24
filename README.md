@@ -8,6 +8,28 @@ Minimal residual disease (MRD) detection holds significant value in the treatmen
 ### Results
 To address these challenges, we propose MRD-Agent, which integrates an ADMM (Alternating Direction Method of Multipliers) module into a DQN (Deep Q-Network) framework. This design enables the agent to dynamically adjust multiple constraints across the detection and filtering steps, achieving optimal parameter configurations through iterative optimisation. Furthermore, a meta-learning model is introduced to facilitate rapid parameter recommendations for highly heterogeneous samples. Experiments on both real-world and simulated datasets demonstrate that MRD-Agent achieves superior stability compared with existing software, with a root mean square error (RMSE) of 6.2% and a variance of 0.47% based on F1-measure. These findings indicate that MRD-Agent effectively balances high sensitivity and high specificity for large-scale detection tasks, substantially enhancing the stability of MRD detection.
 
-
-
 ![Figure 1](https://github.com/aAT0047/MRD-Agent/blob/main/pict/figure1.png)
+## Installation
+
+### Prerequisites
+The following packages and software need to be installed before running **TMBstable**:
+
+#### Python Libraries
+Make sure you have the following Python libraries installed:
+- `os`
+- `csv`
+- `math`
+- `pysam`
+- `numpy`
+- `random`
+- `argparse`
+- `matplotlib`
+- `sklearn`
+- `scipy`
+- `skmultilearn`
+- `quickgt`
+- `pytorch`
+
+You can install the Python dependencies using `pip`:
+```bash
+pip install pysam numpy matplotlib sklearn scipy skmultilearn quickgt torch
