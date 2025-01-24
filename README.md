@@ -61,7 +61,13 @@ The dataset used in this project is sourced from the **PACA-CA Project**, which 
 
 ### Download Instructions
 To download the required data files, you can use the `score-client` command-line tool. Below is an example command for downloading and processing the data:
+## Reference Genome
+at the following URL:[icgc-argo-workflows](https://github.com/icgc-argo-workflows/argo-reference-files).
+The reference genome file `GRCh38_hla_decoy_ebv.fa.gz` is required for data processing. You can download it using the following `wget` command:
 
+```bash
+wget https://object.genomeinformatics.org/genomics-public-data/reference-genome/GRCh38_hla_decoy_ebv/GRCh38_hla_decoy_ebv.fa.gz
+```
 ## Data Download Example
 
 To download data from the PACA-CA project, use the `score-client` command-line tool. Below is an example command for downloading and converting the data:
