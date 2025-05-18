@@ -131,6 +131,29 @@ python extract_indel_features.py \
   -w 8 \
   -t 4
 ```
+## SNV Feature Extractor
+
+Extract single-nucleotide variant (SNV) features from BAM files per sample and produce a merged summary CSV.
+
+---
+
+### Prerequisites
+
+- Python 3.6+  
+- [samtools](http://www.htslib.org/download/)  
+- [bedtools](https://bedtools.readthedocs.io/)  
+- [pandas](https://pandas.pydata.org/) (`pip install pandas`)  
+
+---
+```bash
+python extract_snv_features.py \
+  -i /path/to/bam_dir \
+  -b /path/to/bed_dir \
+  -r /path/to/reference.fa \
+  -g /path/to/germline_snp.bed.gz \
+  -t 8 \
+  -o /path/to/output/all_snv_features.csv
+```
 
 ## Adaptive Parameters in MRD-Agent
 
