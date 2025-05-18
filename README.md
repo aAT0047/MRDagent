@@ -280,6 +280,9 @@ python https://github.com/aAT0047/MRD-Agent/src_code/main.py \
 
 ## 4. Meta-model Training
 We viewed parameter recommendation for each genomic region as distinct yet related "tasks". For each task, we extracted meta-features X (Supplementary table s3) capturing inter-sample heterogeneity from corresponding BAM files and combined these with the optimal parameter configurations y, thus forming a meta-dataset. The CNN-based meta-learning model was then trained on this dataset, explicitly learning the common mapping between meta-features and optimal parameters across tasks (Supplementary Methods.3)
+```bash
+python metamodel.py --features "metamodel/Supplementary Table3.xlsx" --labels "metamodel//Supplementary Table5_sorted.xlsx"
+```
 
 ### Why an Agent is Needed to Balance Constrained Conditions in Variant Detection
 We used MRD-Agent to conduct variant detection. MRD-Agent adopts a DQN framework to facilitate iterative parameter optimisation between the preliminary detection and filtering stages. By dynamically balancing the constraints on false negatives and false positives and integrating stepwise optimisation, MRD-Agent seeks to maximise the overall detection performance.
