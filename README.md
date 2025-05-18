@@ -137,7 +137,7 @@ python extract_snv_features.py \
   -t 8 \
   -o /path/to/output/all_snv_features.csv
 ```
- indel & SNV Meta-feature Explanation
+ indel & SNV Meta-feature Explanation(X)
 | Meta Feature                               | Explanation                                                                                              |
 |--------------------------------------------|----------------------------------------------------------------------------------------------------------|
 | Reference Allele Count                     | The count of reads that support the reference allele at the variant site.                                |
@@ -167,7 +167,7 @@ MRD-Agent supports a comprehensive set of **discrete**, **continuous**, and **fi
 
 ---
 
-### **3.1 Calling Parameters**
+### **3.1 Calling Parameters**(y1)
 The following discrete parameters control specific thresholds and settings for variant calling:
 
 | Parameter                                           | Explanation                                                                                       | Range      | Type     |
@@ -205,7 +205,7 @@ The following discrete parameters control specific thresholds and settings for v
 
 ---
 
-### ** 3.2 Filter Parameters**
+### ** 3.2 Filter Parameters**(y2)
 These parameters are required for **FilterMutectCalls_objectivelast** and control post-calling filtering steps:
 
 | Parameter                                        | Explanation                                                                                               | Range           | Type       |
