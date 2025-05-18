@@ -40,21 +40,6 @@ pip install pysam numpy matplotlib sklearn scipy skmultilearn quickgt torch
 The dataset used in this project is sourced from the **PACA-CA Project**, which can be accessed via a **DACO-authorised account** at the following URL:
 [ICGC ARGO Platform](https://platform.icgc-argo.org/).
 
-
-## Verifying Installation
-
-After successfully installing the required libraries and tools, verify their versions to ensure compatibility. Use the following commands to check:
-
-```bash
-# Verify Python library installations
-python -c "import pysam, numpy, matplotlib, sklearn, scipy, skmultilearn, quickgt, torch; print('All libraries are installed correctly')"
-```
-# Verify external tools
-samtools --version
-bedtools --version
-bcftools --version
-## Data Access
-
 ### PACA-CA Project
 The dataset used in this project is sourced from the **PACA-CA Project**, which can be accessed via a **DACO-authorised account** at the following URL:
 [ICGC ARGO Platform](https://platform.icgc-argo.org/).
@@ -81,7 +66,7 @@ bin/score-client view \
   --output-format bam
 
 ```
-## Split ctDNA Samples & gold VCF files ( historical data)
+## 1.Split ctDNA Samples & gold VCF files ( historical data)
 
 This section describes how to use the `split_by_bed.py` script to split BAM and VCF files based on BED regions for each sample, and generate a CSV mapping table.
 
@@ -111,7 +96,7 @@ python split_genomic_interval.py \
 | sample1  | 1           | sample1_sv_1 | chr1:1000-2000 | /yourpath/split_bed/sample1_sv_1.bed |
 | …        | …           | …            | …              | …                                    |
 
-## Indel Feature Extractor
+## 2.1Indel Feature Extractor
 
 This script extracts insertion/deletion (indel) features from BAM files and outputs per-sample CSVs as well as a merged summary.
 
@@ -131,7 +116,7 @@ python extract_indel_features.py \
   -w 8 \
   -t 4
 ```
-## SNV Feature Extractor
+## 2.2 SNV Feature Extractor
 
 Extract single-nucleotide variant (SNV) features from BAM files per sample and produce a merged summary CSV.
 
@@ -178,13 +163,13 @@ python extract_snv_features.py \
 | HMDP (High-Quality Mismatch Density %)     | The density of high-quality mismatches in the surrounding sequence.                                      |
 | Average Depth                              | The average sequencing depth at the variant site.                                                        |
 
-## Adaptive Parameters in MRD-Agent
+## 3.Adaptive Parameters in MRD-Agent
 
 MRD-Agent supports a comprehensive set of **discrete**, **continuous**, and **filtering** parameters for adaptive optimization during the MRD detection process. Below is a categorized list of these parameters.
 
 ---
 
-### **Calling Discrete Parameters**
+### **3.1Calling Parameters**
 The following discrete parameters control specific thresholds and settings for variant calling:
 
 | Parameter                                           | Explanation                                                                                       | Range      | Type     |
@@ -208,12 +193,6 @@ The following discrete parameters control specific thresholds and settings for v
 | pair-hmm-gap-continuation-penalty (T)               | Penalty for gaps in PairHMM calculations.                                                         | (6, 15)    | Discrete |
 | mbq (T)                                             | Minimum base quality for read bases to be considered.                                              | (6, 20)    | Discrete |
 
-
----
-
-### **Calling Continuous Parameters**
-The following continuous parameters are used for dynamic threshold adjustments and error handling:
-
 | Parameter                                                  | Explanation                                                      | Range           | Type       |
 |------------------------------------------------------------|------------------------------------------------------------------|-----------------|------------|
 | init-lod (X)                                               | Initial LOD threshold for variant calling.                       | (0.5, 3.5)      | Continuous |
@@ -228,7 +207,7 @@ The following continuous parameters are used for dynamic threshold adjustments a
 
 ---
 
-### **Filter Parameters**
+### ** 3.2 Filter Parameters**
 These parameters are required for **FilterMutectCalls_objectivelast** and control post-calling filtering steps:
 
 | Parameter                                        | Explanation                                                                                               | Range           | Type       |
