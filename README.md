@@ -40,10 +40,6 @@ pip install pysam numpy matplotlib sklearn scipy skmultilearn quickgt torch
 The dataset used in this project is sourced from the **PACA-CA Project**, which can be accessed via a **DACO-authorised account** at the following URL:
 [ICGC ARGO Platform](https://platform.icgc-argo.org/).
 
-### PACA-CA Project
-The dataset used in this project is sourced from the **PACA-CA Project**, which can be accessed via a **DACO-authorised account** at the following URL:
-[ICGC ARGO Platform](https://platform.icgc-argo.org/).
-
 ### Download Instructions
 To download the required data files, you can use the `score-client` command-line tool. Below is an example command for downloading and processing the data:
 ## Reference Genome
@@ -96,13 +92,15 @@ python split_genomic_interval.py \
 | sample1  | 1           | sample1_sv_1 | chr1:1000-2000 | /yourpath/split_bed/sample1_sv_1.bed |
 | …        | …           | …            | …              | …                                    |
 
-## 2.1Indel Feature Extractor
+## 2  Feature Extractor
+  For each BEDregion, we extracted meta-features X (Supplementary table s3) capturing inter-sample heterogeneity from corresponding BAM files
+### 2.1Indel Feature Extractor
 
 This script extracts insertion/deletion (indel) features from BAM files and outputs per-sample CSVs as well as a merged summary.
 
 ---
 
-### Prerequisites
+#### Prerequisites
 
 - Python 3.6+  
 - [samtools](http://www.htslib.org/download/)  
@@ -116,13 +114,13 @@ python extract_indel_features.py \
   -w 8 \
   -t 4
 ```
-## 2.2 SNV Feature Extractor
+### 2.2 SNV Feature Extractor
 
 Extract single-nucleotide variant (SNV) features from BAM files per sample and produce a merged summary CSV.
 
 ---
 
-### Prerequisites
+#### Prerequisites
 
 - Python 3.6+  
 - [samtools](http://www.htslib.org/download/)  
