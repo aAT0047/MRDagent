@@ -81,6 +81,57 @@ bin/score-client view \
   --output-format bam
 
 ```
+## Split ctDNA Samples & gold VCF files ( historical data)
+
+This section describes how to use the `split_by_bed.py` script to split BAM and VCF files based on BED regions for each sample, and generate a CSV mapping table.
+
+
+### Prerequisites
+
+- Python 3  
+- samtools  
+- bcftools  
+- tqdm (`pip install tqdm`)  
+- Example directory structure:
+  
+```bash
+python split_genomic_interval.py \
+-i /yourpath/ctDNA \
+-v /yourpath/VCF \
+-b /yourpath/bed \
+-B /yourpath/split_bam \
+-V /yourpath/split_vcf \
+-D /yourpath/split_bed \
+-m /yourpath/mapping.csv \
+-t 8 \
+-r 10
+```
+| SampleID | RegionIndex | NewFileName  | BEDRegion      | RegionFile                           |
+|----------|-------------|--------------|----------------|--------------------------------------|
+| sample1  | 1           | sample1_sv_1 | chr1:1000-2000 | /yourpath/split_bed/sample1_sv_1.bed |
+| …        | …           | …            | …              | …                                    |
+
+## Indel Feature Extractor
+
+This script extracts insertion/deletion (indel) features from BAM files and outputs per-sample CSVs as well as a merged summary.
+
+---
+
+### Prerequisites
+
+- Python 3.6+  
+- [samtools](http://www.htslib.org/download/)  
+- [tqdm](https://github.com/tqdm/tqdm) (`pip install tqdm`)  
+
+---
+```bash
+python extract_indel_features.py \
+  -i /your/path/to/bam_files \
+  -o /your/path/to/output_dir \
+  -w 8 \
+  -t 4
+```
+
 ## Adaptive Parameters in MRD-Agent
 
 MRD-Agent supports a comprehensive set of **discrete**, **continuous**, and **filtering** parameters for adaptive optimization during the MRD detection process. Below is a categorized list of these parameters.
@@ -140,6 +191,9 @@ These parameters are required for **FilterMutectCalls_objectivelast** and contro
 - `pcr_slippage_rate`
 
 ---
+
+
+
 ## Usage Guide for MRD-Agent
 
 Below is an example usage script for running MRD-Agent using SLURM for parallel task management. This script processes BAM files by splitting them into groups, dynamically assigns tasks to SLURM job arrays, and executes the main MRD-Agent Python program.
