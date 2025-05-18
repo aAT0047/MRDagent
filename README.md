@@ -161,7 +161,7 @@ python extract_snv_features.py \
 | HMDP (High-Quality Mismatch Density %)     | The density of high-quality mismatches in the surrounding sequence.                                      |
 | Average Depth                              | The average sequencing depth at the variant site.                                                        |
 
-## 3.Adaptive Parameters in MRD-Agent
+## 3.Adaptive Parameters in MRD-Agent (DQN & ADMM)
 
 MRD-Agent supports a comprehensive set of **discrete**, **continuous**, and **filtering** parameters for adaptive optimization during the MRD detection process. Below is a categorized list of these parameters.
 
@@ -277,6 +277,9 @@ python https://github.com/aAT0047/MRD-Agent/src_code/main.py \
     --bam_files_path "${bam_files_list}" \
     --output_path "${TASK_OUTPUT_PATH}"
 ```
+
+## 4. Meta-model Training
+We viewed parameter recommendation for each genomic region as distinct yet related "tasks". For each task, we extracted meta-features X (Supplementary table s3) capturing inter-sample heterogeneity from corresponding BAM files and combined these with the optimal parameter configurations y, thus forming a meta-dataset. The CNN-based meta-learning model was then trained on this dataset, explicitly learning the common mapping between meta-features and optimal parameters across tasks (Supplementary Methods.3)
 
 ### Why an Agent is Needed to Balance Constrained Conditions in Variant Detection
 We used MRD-Agent to conduct variant detection. MRD-Agent adopts a DQN framework to facilitate iterative parameter optimisation between the preliminary detection and filtering stages. By dynamically balancing the constraints on false negatives and false positives and integrating stepwise optimisation, MRD-Agent seeks to maximise the overall detection performance.
