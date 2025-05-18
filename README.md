@@ -167,7 +167,7 @@ MRD-Agent supports a comprehensive set of **discrete**, **continuous**, and **fi
 
 ---
 
-### **3.1Calling Parameters**
+### **3.1 Calling Parameters**
 The following discrete parameters control specific thresholds and settings for variant calling:
 
 | Parameter                                           | Explanation                                                                                       | Range      | Type     |
@@ -226,13 +226,9 @@ These parameters are required for **FilterMutectCalls_objectivelast** and contro
 
 
 
-## Usage Guide for MRD-Agent
+###3.3 Usage Guide for MRD-Agent
 
 Below is an example usage script for running MRD-Agent using SLURM for parallel task management. This script processes BAM files by splitting them into groups, dynamically assigns tasks to SLURM job arrays, and executes the main MRD-Agent Python program.
-
----
-
-### SLURM Batch Script Example
 
 ```bash
 #!/bin/bash
