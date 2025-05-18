@@ -214,31 +214,36 @@ The following discrete parameters control specific thresholds and settings for v
 ### **Calling Continuous Parameters**
 The following continuous parameters are used for dynamic threshold adjustments and error handling:
 
-- `init-lod`
-- `max-af`
-- `emit-lod`
-- `active-probability-threshold`
-- `adaptive-pruning-initial-error-rate`
-- `pruning-lod-threshold`
-- `flow-probability-threshold`
-- `expected-mismatch-rate-for-read-disqualification`
-- `min-AF`
+| Parameter                                                  | Explanation                                                      | Range           | Type       |
+|------------------------------------------------------------|------------------------------------------------------------------|-----------------|------------|
+| init-lod (X)                                               | Initial LOD threshold for variant calling.                       | (0.5, 3.5)      | Continuous |
+| max-af (X)                                                 | Maximum allowed allele frequency for variants.                   | (0.005, 0.05)   | Continuous |
+| emit-lod (X)                                               | LOD threshold for emitting potential variants.                   | (1.5, 3.0)      | Continuous |
+| active-probability-threshold (X)                           | Probability threshold for activating a region.                   | (0.0005, 0.01)  | Continuous |
+| adaptive-pruning-initial-error-rate (X)                    | Initial error rate for adaptive pruning in assembly.             | (0.0005, 0.005) | Continuous |
+| pruning-lod-threshold (X)                                  | LOD threshold for pruning assembly graph.                        | (2, 5)          | Continuous |
+| flow-probability-threshold (X)                             | Threshold for flow-based probability.                            | (0.002, 0.01)   | Continuous |
+| expected-mismatch-rate-for-read-disqualification (X)       | Expected mismatch rate for disqualifying reads.                  | (0.01, 0.05)    | Continuous |
+| min-AF (X)                                                 | Minimum allele frequency threshold for variant calling.          | (1e-5, 1e-3)    | Continuous |
 
 ---
 
 ### **Filter Parameters**
 These parameters are required for **FilterMutectCalls_objectivelast** and control post-calling filtering steps:
 
-- `distance_on_haplotype`
-- `f_score_beta`
-- `false_discovery_rate`
-- `initial_threshold`
-- `log_artifact_prior`
-- `log_indel_prior`
-- `log_snv_prior`
-- `max_events_in_region`
-- `min_slippage_length`
-- `pcr_slippage_rate`
+| Parameter                                        | Explanation                                                                                               | Range           | Type       |
+|--------------------------------------------------|-----------------------------------------------------------------------------------------------------------|-----------------|------------|
+| distance_on_haplotype (X)                        | Maximum allowable distance between variants on the same haplotype for consideration.                      | (10, 200)       | Continuous |
+| f_score_beta (X)                                 | Weighting factor for precision-recall balance in F1-score calculation.                                    | (0.5, 2.0)      | Continuous |
+| false_discovery_rate (X)                         | Threshold for controlling the expected proportion of false discoveries among the identified variants.     | (0.001, 0.2)    | Continuous |
+| initial_threshold (X)                            | Initial confidence threshold for variant calling.                                                         | (0.005, 0.2)    | Continuous |
+| log_artifact_prior (X)                           | Log-scaled prior probability of artifacts in sequencing data.                                             | (-5.0, -1.5)    | Continuous |
+| log_indel_prior (X)                              | Log-scaled prior probability of indels in sequencing data.                                                | (-20.0, -10.0)  | Continuous |
+| log_snv_prior (X)                                | Log-scaled prior probability of single-nucleotide variants (SNVs) in sequencing data.                     | (-20.0, -10.0)  | Continuous |
+| max_events_in_region (T)                         | Maximum number of variant events allowed in a specific genomic region.                                    | (2, 10)         | Discrete   |
+| min_slippage_length (T)                          | Minimum length of homopolymer repeats required to identify PCR slippage events.                           | (4, 12)         | Discrete   |
+| pcr_slippage_rate (X)                            | Estimated rate of PCR slippage in sequencing data.                                                        | (0.005, 0.3)    | Continuous |
+
 
 ---
 
