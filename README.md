@@ -154,6 +154,29 @@ python extract_snv_features.py \
   -t 8 \
   -o /path/to/output/all_snv_features.csv
 ```
+ indel & SNV Meta-feature Explanation
+| Meta Feature                               | Explanation                                                                                              |
+|--------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| Reference Allele Count                     | The count of reads that support the reference allele at the variant site.                                |
+| Non-reference Allele Count                 | The count of reads that support the non-reference (alternative) allele at the variant site.              |
+| Sum of Base Qualities                      | The sum of base quality scores for all reads at the variant site, indicating sequencing confidence.     |
+| Tumour Coverage                            | The total number of reads covering the variant site in tumour samples.                                   |
+| Mapping Quality                            | The average mapping quality of reads at the variant site, reflecting alignment accuracy.                 |
+| Median Read Position                       | The median position of the variant within the sequencing reads, used to assess positional bias.          |
+| Homopolymer Rate                           | The proportion of homopolymer regions (repeated bases) near the variant site.                            |
+| GC Content                                 | The percentage of guanine (G) and cytosine (C) nucleotides in the surrounding sequence.                  |
+| Trinucleotide Sequence Counts              | The frequency of specific trinucleotide sequences near the variant site.                                 |
+| Trinucleotide Total Count                  | The total count of trinucleotide sequences in the region surrounding the variant site.                   |
+| Distance to Germline SNP                   | The distance between the detected variant and the nearest known germline single nucleotide polymorphism. |
+| Repeat Percentage                          | The proportion of repeated sequences in the region around the variant site.                              |
+| Short SV Percentage                        | The percentage of short structural variants (SVs) in the region around the variant.                      |
+| Middle SV Percentage                       | The percentage of medium-sized structural variants (SVs) in the region around the variant.               |
+| Long SV Percentage                         | The percentage of long structural variants (SVs) in the region around the variant.                       |
+| Average Read Length                        | The average length of sequencing reads covering the variant site.                                        |
+| Small Gap Account                          | The number of small gaps (insertions or deletions) near the variant site.                                |
+| RMB (Read Mismatch Bias)                   | The bias in the occurrence of mismatched reads at the variant site.                                      |
+| HMDP (High-Quality Mismatch Density %)     | The density of high-quality mismatches in the surrounding sequence.                                      |
+| Average Depth                              | The average sequencing depth at the variant site.                                                        |
 
 ## Adaptive Parameters in MRD-Agent
 
@@ -164,23 +187,27 @@ MRD-Agent supports a comprehensive set of **discrete**, **continuous**, and **fi
 ### **Calling Discrete Parameters**
 The following discrete parameters control specific thresholds and settings for variant calling:
 
-- `base-quality-score-threshold`
-- `callable-depth`
-- `f1r2-median-mq`
-- `f1r2-min-bq`
-- `max-reads-per-alignment-start`
-- `pcr-indel-qual`
-- `pcr-snv-qual`
-- `assembly-region-padding`
-- `kmer-size`
-- `max-assembly-region-size`
-- `max-prob-propagation-distance`
-- `min-assembly-region-size`
-- `max-unpruned-variants`
-- `min-dangling-branch-length`
-- `phred-scaled-global-read-mismapping-rate`
-- `pair-hmm-gap-continuation-penalty`
-- `mbq`
+| Parameter                                           | Explanation                                                                                       | Range      | Type     |
+|-----------------------------------------------------|---------------------------------------------------------------------------------------------------|------------|----------|
+| base-quality-score-threshold (T)                    | Minimum base quality score required for a base to be considered.                                  | (6, 25)    | Discrete |
+| callable-depth (T)                                  | Minimum read depth required to call a site.                                                       | (5, 101)   | Discrete |
+| f1r2-median-mq (T)                                  | Median mapping quality of F1R2 reads.                                                             | (30, 71)   | Discrete |
+| f1r2-min-bq (T)                                     | Minimum base quality of F1R2 reads.                                                               | (6, 31)    | Discrete |
+| max-reads-per-alignment-start (T)                   | Maximum number of reads allowed per alignment start.                                              | (0, 5001)  | Discrete |
+| pcr-indel-qual (T)                                  | Quality score threshold for PCR indel filtering.                                                  | [10, 60]   | Discrete |
+| pcr-snv-qual (T)                                    | Quality score threshold for PCR SNV filtering.                                                    | [10, 60]   | Discrete |
+| assembly-region-padding (T)                         | Padding size added to assembly regions.                                                            | (50, 2001) | Discrete |
+| kmer-size (first instance) (T)                      | Size of kmers used in assembly (small regions).                                                   | (5, 25)    | Discrete |
+| kmer-size (second instance) (T)                     | Size of kmers used in assembly (large regions).                                                   | (25, 50)   | Discrete |
+| max-assembly-region-size (T)                        | Maximum size of assembly regions.                                                                 | (200, 001) | Discrete |
+| max-prob-propagation-distance (T)                   | Maximum distance for probability propagation.                                                     | (40, 301)  | Discrete |
+| min-assembly-region-size (T)                        | Minimum size of assembly regions.                                                                 | (30, 151)  | Discrete |
+| max-unpruned-variants (T)                           | Maximum number of unpruned variants allowed.                                                      | (50, 501)  | Discrete |
+| min-dangling-branch-length (T)                      | Minimum length of dangling branches allowed in assembly graph.                                     | (2, 10)    | Discrete |
+| phred-scaled-global-read-mismapping-rate (T)        | Phred-scaled global mismapping rate threshold for reads.                                           | (30, 51)   | Discrete |
+| pair-hmm-gap-continuation-penalty (T)               | Penalty for gaps in PairHMM calculations.                                                         | (6, 15)    | Discrete |
+| mbq (T)                                             | Minimum base quality for read bases to be considered.                                              | (6, 20)    | Discrete |
+
 
 ---
 
