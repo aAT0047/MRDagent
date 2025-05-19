@@ -66,9 +66,9 @@ bin/score-client view \
 MRD-Agent workflow consists of five key steps：1.Initialize 2. Feature Extractor 3.Adaptive Parameters  4.Meta-model Training
 
 ## 1.Initialize 
-Split ctDNA Samples & gold VCF files ( historical data)
+Split ctDNA Samples & gold VCF files ( **historical data**)
 
-This section describes how to use the `split_by_bed.py` script to split BAM and VCF files based on BED regions for each sample, and generate a CSV mapping table.
+This section describes how to use the **split_genomic_interval.py** script to split BAM and VCF files based on BED regions for each sample, and generate a CSV mapping table.
 
 
 ### Prerequisites
@@ -294,10 +294,9 @@ We used MRD-Agent to conduct variant detection. MRD-Agent adopts a DQN framework
 ![Figure 2](https://github.com/aAT0047/MRD-Agent/blob/main/pict/figure4.png)
 
 ### Why a Meta-Model is Needed for Rapid Parameter Configuration
-```bash
-python https://github.com/aAT0047/MRD-Agent/metafeature/metafeatureindel.py
-python https://github.com/aAT0047/MRD-Agent/metafeature/metafeaturesnv.py
-```
+As previously described, MRD-Agent’s iterative interactions between the agent and ADMM module result in exponentially increased computational complexity. Moreover, due to the absence of an explicit loss function for gradient calculation, parameter optimisation relies solely on evaluation against a gold-standard reference, significantly restricting its applicability to new ctDNA samples.
+, we trained a CNN-based meta-model using historical samples (X: Supplementary Table 3; y:  Supplementary Table 5), We conducted 10-fold cross-validation on 474 samples, using 427 for training and 47 for testing in each fold.
+
 
 ![Figure 5](https://github.com/aAT0047/MRD-Agent/blob/main/pict/figure5.png)
 
