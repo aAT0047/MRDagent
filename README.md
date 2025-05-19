@@ -62,7 +62,7 @@ bin/score-client view \
   --output-format bam
 
 ```
-# MRD-Agent 
+# MRD-Agent workflow
 MRD-Agent workflow consists of five key steps：1.Initialize 2. Feature Extractor 3.Adaptive Parameters  4.Meta-model Training
 
 ## 1.Initialize 
