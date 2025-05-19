@@ -246,7 +246,7 @@ Below is an example usage script for running MRD-Agent using SLURM for parallel 
 
 # Configuration paths
 FOLDER_PATH="yourpath/split_bam"
-OUTPUT_BASE_PATH="yourpath/ICGCCRAM/runbam/"
+OUTPUT_BASE_PATH="yourpath"
 TASK_OUTPUT_PATH="${OUTPUT_BASE_PATH}group_${SLURM_ARRAY_TASK_ID}/"
 
 # Dynamically create output directory
