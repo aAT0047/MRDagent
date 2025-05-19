@@ -12,7 +12,7 @@ In this study, we propose MRD-Agent, a novel variant detection tool designed spe
 ## Installation
 
 ### Prerequisites
-The following packages and software need to be installed before running **TMBstable**:
+The following packages and software need to be installed before running **MRD-Agent**:
 
 #### Python Libraries
 Make sure you have the following Python libraries installed:
