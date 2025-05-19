@@ -62,7 +62,10 @@ bin/score-client view \
   --output-format bam
 
 ```
-## 1.Split ctDNA Samples & gold VCF files ( historical data)
+MRD-Agent workflow consists of five key steps：1.Initialize 2. Feature Extractor 3.Adaptive Parameters  4.Meta-model Training
+
+## 1.Initialize 
+Split ctDNA Samples & gold VCF files ( historical data)
 
 This section describes how to use the `split_by_bed.py` script to split BAM and VCF files based on BED regions for each sample, and generate a CSV mapping table.
 
@@ -161,7 +164,7 @@ python extract_snv_features.py \
 | HMDP (High-Quality Mismatch Density %)     | The density of high-quality mismatches in the surrounding sequence.                                      |
 | Average Depth                              | The average sequencing depth at the variant site.                                                        |
 
-## 3.Adaptive Parameters in MRD-Agent (DQN & ADMM)
+## 3.Adaptive Parameters in DQN & ADMM
 
 MRD-Agent supports a comprehensive set of **discrete**, **continuous**, and **filtering** parameters for adaptive optimization during the MRD detection process. Below is a categorized list of these parameters.
 
