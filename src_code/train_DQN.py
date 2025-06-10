@@ -107,8 +107,8 @@ def train_dqn(episodes, env_kwargs):
     agent = Agent(state_size, action_size)
     best_score = -float('inf')
     best_model_state = None
-    batch_size = 4
-    UPDATE_TARGET_EVERY = 5
+    batch_size = 8
+    UPDATE_TARGET_EVERY = 50
 
     for e in range(episodes):
         state, _ = env.reset()
