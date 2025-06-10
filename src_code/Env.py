@@ -58,7 +58,7 @@ class CustomEnv(gym.Env):
         self.update_metrics()
         reward = self.calculate_reward(delta_fn, delta_fp)
         terminated = self.F1 > 0.8
-        truncated = self.iteration >=10
+        truncated = self.iteration >=100
         # 如果你明确需要将它们转换为布尔值，可以使用 bool 而不是 np.bool_
         terminated = bool(terminated)
         truncated = bool(truncated)
