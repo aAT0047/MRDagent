@@ -263,7 +263,7 @@ def process_bam_file(bam_file):
         'truth_vcf_path': truth_vcf_path
     }
     # 训练模型并保存最佳状态
-    best_model_state = train_dqn(1, env_kwargs)
+    best_model_state = train_dqn(1000, env_kwargs)
     torch.save(best_model_state, f'{base_vcf}best_model.pth')
     logging.info(f"Trained model for {bam_file} with best state saved.")
     logging.info(f"文件 {bam_file} 已完成.")
