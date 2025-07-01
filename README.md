@@ -1,4 +1,4 @@
-# MRD-Agent
+# MRDagent
 [![DOI](https://zenodo.org/badge/920480472.svg)](https://doi.org/10.5281/zenodo.15458496)
 ## ABSTRACT
 
